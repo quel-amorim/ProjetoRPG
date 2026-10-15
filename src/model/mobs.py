@@ -11,6 +11,22 @@ class Mob:
             "agilidade" : agilidade,
             "inteligencia" : inteligencia
         }
+        self.hpMax = 10 * self.atributo["vitalidade"]
+        self.hpMin = 2 / (self.hpMax * 5)
+        self.danoMax = 10 * self.atributo["forca"]
+        self.danoMin = 2 / (self.danoMax * 5)
+        self.restencia = 10 * self.atributo["defesa"]
+        self.velocidade = 10 * self.atributo["agilidade"]
+        self.mental = 10 * self.atributo["inteligencia"]
+        self.valoresStatus = {
+            "hpMax" : self.hpMax,
+            "hpMin" : self.hpMin,
+            "danoMax" : self.danoMax,
+            "danoMin" : self.danoMin,
+            "resistencia" : self.restencia,
+            "velocidade" : self.velocidade,
+            "mental" : self.mental
+        }
         self.geraRaridades()
         self.moedas = randint(1 , 50)
         self.xp = randint(1 ,50)
@@ -52,10 +68,21 @@ class Mob:
     AGI : {self.atributo["agilidade"]}
     INT : {self.atributo["inteligencia"]}
 """)
+
+    def exibirStatus(self):
+        print(f"  HP :{self.valoresStatus["hpMax"]}/ {self.valoresStatus["hpMin"]}")
+        print(f"  DANO : {self.valoresStatus["danoMax"]} / {self.danoMin}")
+        print(f"  RESISTENCIA : {self.valoresStatus["resistencia"]}")
+        print(f"  VELOCIDADE : {self.valoresStatus["velocidade"]}")
+        print(f"  MENTAL : {self.valoresStatus["mental"]}")
+
     def __repr__(self):
         return f" * MOB {self.nomeMob} Nv {self.nivel}"
 
-teste = Mob("ZUMBI","TERRA",5,10,5,2,1)
+zumbi = Mob("ZUMBI","TERRA",5,10,5,2,1)
+demonio = Mob("DEMONIO","TREVAS",11,14,10,12,10)
+anjo = Mob("ANJO","LUZ",12,14,10,13,12)
 
-print(teste)
-teste.exibirAtributos()
+zumbi.exibirStatus()
+
+#ARRUMAR DEPOIS OS VALORES DO STATUS
