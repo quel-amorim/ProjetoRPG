@@ -1,29 +1,50 @@
 class Maestria:
-    def __init__(self,nomeMaestria,elemento,vitalidade,forca,defesa,agilidade,inteligencia):
+    def __init__(self,nomeMaestria):
         self.nomeMaestria = nomeMaestria
-        self.elemento = elemento
         self.nivel = 1
-        self.vitalidade = vitalidade
-        self.forca = forca
-        self.defesa = defesa
-        self.agilidade = agilidade
-        self.inteligencia = inteligencia
-        self.exp = 0
+        self.atributos = {
+            'vitalidade' : 10,
+            'forca' : 10,
+            'defesa' : 10,
+            'agilidade' : 10,
+            'inteligencia' : 10
+        }
+        self.xpAtual = 0
+        self.xpNivel = 100
 
     def exibirAtributos(self):
-        return f"""
-    VIT : {self.vitalidade}
-    STR : {self.forca}
-    RES : {self.defesa}
-    AGI : {self.agilidade}
-    INT : {self.inteligencia}
-"""
+        print(f'------ Atributos {self.nomeMaestria} ----------')
+        print(f'    VITALIDADE : {self.atributos['vitalidade']}')
+        print(f'    FORCA : {self.atributos['forca']}')
+        print(f'    DEFESA : {self.atributos['defesa']}')
+        print(f'    AGILIDADE : {self.atributos['agilidade']}')
+        print(f'    INTELIGENCIA : {self.atributos['inteligencia']}')
+        print('---------------------------------------------------------\n')
 
-    def __repr__(self):
-        return f"{self.nomeMaestria} Nv {self.nivel}\nElemento :{self.elemento}\n{self.exibirAtributos()}\nBarra de Exp : {self.exp}"
+class Lutador(Maestria):
+    def __init__(self):
+        super().__init__('Lutador')
+        self.atributos['vitalidade'] +=2
+        self.atributos['forca'] += 5
+        self.atributos['defesa'] -= 3
+        self.atributos['agilidade'] -= 2
+        self.atributos['inteligencia'] -=5
 
-lutador = Maestria("LUTADOR","TERRA",10,15,10,7,5)
-mago = Maestria("MAGO","FOGO",10,10,12,13,15)
-arqueiro = Maestria("ARQUEIRO","VENTO",10,14,10,15,10)
+class Mago(Maestria):
+    def __init__(self):
+        super().__init__('Mago')
+        self.atributos['vitalidade'] -=1
+        self.atributos['forca'] -= 5
+        self.atributos['defesa'] += 1
+        self.atributos['agilidade'] += 3
+        self.atributos['inteligencia'] +=5
 
-print(lutador)
+class Arqueiro(Maestria):
+    def __init__(self):
+        super().__init__('Arqueiro Safado')
+        self.atributos['agilidade'] += 5
+        self.atributos['inteligencia'] -=4
+
+lutador = Lutador()
+
+lutador.exibirAtributos()
